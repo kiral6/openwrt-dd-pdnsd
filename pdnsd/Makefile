@@ -5,7 +5,7 @@ PKG_VERSION:=1.2.9a-par
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=git://github.com/kiral6/openwrt-dd-pdnsd/
+PKG_SOURCE_URL:=https://github.com/kiral6/openwrt-dd-pdnsd.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=a8e46ccba7b0fa2230d6c42ab6dcd92926f6c21d
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
