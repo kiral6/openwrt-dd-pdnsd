@@ -5,13 +5,11 @@ PKG_VERSION:=1.2.9a-par
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/kiral6/openwrt-dd-pdnsd.git
+PKG_SOURCE_URL:=https://github.com/code4craft/pdnsd.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=a8e46ccba7b0fa2230d6c42ab6dcd92926f6c21d
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_SOURCE_SUBDIR)
-
-
 PKG_MIRROR_HASH:=skip
 # CMAKE_INSTALL:=1
 
@@ -23,6 +21,10 @@ define Package/pdnsd
   SUBMENU:=Web Servers/Proxies
   DEPENDS:=+libpthread
   TITLE:=Proxy DNS Server
+endef
+
+define Package/$(PKG_NAME)/conffiles
+/etc/pdnsd.conf
 endef
 
 define Package/pdnsd/description
@@ -37,6 +39,13 @@ endef
 
 TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include
 #TARGET_CFLAGS += -ggdb3
+TARGET_CFLAGS += -ffunction-sections -fdata-sections
+TARGET_LDFLAGS += -Wl,--gc-sections
+
+# Use Link time optimization
+TARGET_CFLAGS += -flto
+TARGET_LDFLAGS += -Wl,-flto
+
 
 CMAKE_OPTIONS += -DDEBUG=1
 
@@ -54,7 +63,7 @@ define Package/pdnsd/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/pdnsd.init $(1)/etc/init.d/pdnsd
 	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_CONF) $(PKG_BUILD_DIR)/doc/pdnsd.conf $(1)/etc/
+	$(INSTALL_CONF) ./files/pdnsd.conf $(1)/etc/
 endef
 
 $(eval $(call BuildPackage,pdnsd))
