@@ -9,7 +9,10 @@ PKG_SOURCE_URL:=https://github.com/kiral6/openwrt-dd-pdnsd.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=a8e46ccba7b0fa2230d6c42ab6dcd92926f6c21d
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-# PKG_MIRROR_MD5SUM:=
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_SOURCE_SUBDIR)
+
+
+PKG_MIRROR_HASH:=skip
 # CMAKE_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
@@ -39,7 +42,8 @@ CMAKE_OPTIONS += -DDEBUG=1
 
 CONFIGURE_ARGS += \
 		--with-cachedir=/tmp/pdnsd \
-		--enable-ipv6
+		--enable-ipv6 \
+		--enable-ipv6-startup
 
 define Package/pdnsd/install
 	$(INSTALL_DIR) $(1)/usr/sbin
