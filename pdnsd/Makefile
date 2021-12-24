@@ -38,7 +38,7 @@ define Package/pdnsd/description
 endef
 
 TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include
-#TARGET_CFLAGS += -ggdb3
+# TARGET_CFLAGS += -ggdb3
 TARGET_CFLAGS += -ffunction-sections -fdata-sections
 TARGET_LDFLAGS += -Wl,--gc-sections
 

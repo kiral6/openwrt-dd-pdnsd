@@ -7,7 +7,7 @@ You can use "src-git pdnsd git://github.com/kiral6/openwrt-dd-pdnsd.git" to add 
 
 ```
 cp feeds.conf.default feeds.conf
-echo 'src-git pdnsd git://github.com/kiral6/openwrt-dd-pdnsd.git' >> feeds.conf
+echo 'src-git ocPackages https://github.com/kiral6/openwrt-dd-pdnsd.git' >> feeds.conf
 
 ./scripts/feeds update -a
 ./scripts/feeds install pdnsd
